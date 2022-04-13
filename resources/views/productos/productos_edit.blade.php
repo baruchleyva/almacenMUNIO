@@ -1,7 +1,7 @@
 
-@extends("maestra")
-@section("titulo", "Editar producto")
-@section("contenido")
+@extends('layouts.aplicacion')
+
+@section("content")
     <div class="row">
         <div class="col-12">
             <h1>
@@ -42,7 +42,7 @@
                            type="decimal(9,2)" placeholder="Existencia">
                 </div>
 
-                @include("notificacion")
+
                 <button class="btn btn-success">Guardar</button>
                 <a class="btn btn-primary" href="{{route("productos.index")}}">Volver</a>
             </form>

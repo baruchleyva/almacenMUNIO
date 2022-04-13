@@ -22,11 +22,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::resource("productos", "ProductosController");
+Route::resource('productos', '\App\Http\Controllers\ProductosController');
+/*
 Route::get('productos.index', [App\Http\Controllers\ProductosController::class, 'index'])->name('productos.index');
 Route::get('productos.create', [App\Http\Controllers\ProductosController::class, 'create'])->name('productos.create');
 Route::get('productos.edit', [App\Http\Controllers\ProductosController::class, 'edit'])->name('productos.edit');
 Route::get('productos.destroy', [App\Http\Controllers\ProductosController::class, 'destroy'])->name('productos.destroy');
 Route::post('productos.store', [App\Http\Controllers\ProductosController::class, 'store'])->name('productos.store');
+Route::get('productos.edit/{id}', [App\Http\Controllers\ProductosController::class, 'edit']);
+Route::put('productos.update', [App\Http\Controllers\ProductosController::class, 'update']);//->name('productos.update');
+*/
