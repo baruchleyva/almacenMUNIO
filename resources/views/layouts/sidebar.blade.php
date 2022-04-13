@@ -49,7 +49,7 @@
                         <a class="nav-link" href=""><FONT COLOR="white">Tablero</a></FONT>
                     </nav>
                 </div>-->
-                 <a class="nav-link" href="" style="color:white;">
+                 <a class="nav-link" href="{{route('proveedors.index')}}" style="color:white;">
                     <i class='fas fa-truck'></i>
                     <div class="sb-nav-link-icon"></div>
                     <FONT COLOR="white">

@@ -24,6 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Route::resource("productos", "ProductosController");
 Route::resource('productos', '\App\Http\Controllers\ProductosController');
+Route::resource('proveedors', '\App\Http\Controllers\ProveedoresController');
 /*
 Route::get('productos.index', [App\Http\Controllers\ProductosController::class, 'index'])->name('productos.index');
 Route::get('productos.create', [App\Http\Controllers\ProductosController::class, 'create'])->name('productos.create');

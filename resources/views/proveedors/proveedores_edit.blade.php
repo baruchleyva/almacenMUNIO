@@ -1,7 +1,8 @@
 
-@extends("maestra")
+@extends('layouts.aplicacion')
+@section("content")
 @section("titulo", "Editar proveedor")
-@section("contenido")
+
     <div class="row">
         <div class="col-12">
             <h1>
@@ -29,7 +30,13 @@
                            type="text" placeholder="Domicilio">
                 </div>
 
-                @include("notificacion")
+                <div class="form-group">
+                    <label class="label">Giro</label>
+                    <input required value="{{$proveedor->giro}}" autocomplete="off" name="domicilio"
+                           class="form-control"
+                           type="text" placeholder="giro">
+                </div>
+
                 <button class="btn btn-success">Guardar</button>
                 <a class="btn btn-primary" href="{{route("proveedors.index")}}">Volver</a>
             </form>
