@@ -36,7 +36,7 @@
         <div class="col-12">
             <h1>
                 <br>
-                Productos <i class="fa fa-box"></i></h1>
+                Productos / Inventario <i class="fa fa-box"></i></h1>
                 <div class="row">
                     <div class="col-4">
                         <div class="input-group mb-3">

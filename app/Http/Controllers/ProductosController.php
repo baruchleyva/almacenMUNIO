@@ -5,6 +5,7 @@
 namespace App\Http\Controllers;
 
 use App\Producto;
+use App\Proveedors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,8 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        return view("productos.productos_create");
+        $proveedores = Proveedors::SELECT('*')->get();
+        return view("productos.productos_create", compact('proveedores'));
     }
 
     /**

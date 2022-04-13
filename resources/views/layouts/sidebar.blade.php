@@ -25,7 +25,7 @@
                     <i class='fas fa-archive'></i>
                     <div class="sb-nav-link-icon"></div>
                     <FONT COLOR="white">
-                    Productos
+                    Productos / Inventario
                     </FONT>
                 </a>
                 <!--<div class="collapse" id="menuEmpleados" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
@@ -35,13 +35,13 @@
                     </nav>
                 </div>-->
                 <!-- Modulo de permisos -->
-                <a class="nav-link collapsed" href="#" style="color:white;">
+                <!--<a class="nav-link collapsed" href="#" style="color:white;">
                     <i class='fas fa-clipboard'></i>
                     <div class="sb-nav-link-icon"></div>
                     <FONT COLOR="white">
                     Inventario
                     </FONT>
-                </a>
+                </a>-->
                     <!--<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">

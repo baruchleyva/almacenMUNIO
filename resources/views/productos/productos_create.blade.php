@@ -3,6 +3,20 @@
 @extends('layouts.aplicacion')
 
 @section("content")
+<script type="text/javascript">
+    function checarP() {
+        // body...
+        var id_pro = $('#inputGroupSelect01').val();
+        //console.log(id_pro);
+        $('#idP').val(id_pro);
+        $a = $('#idP').val();
+        //console.log($a);
+        if($a != ''){
+            document.getElementById('formulario1').submit();
+        }
+
+    }
+</script>
     <div class="row">
         <div class="col-12">
             <h1>
@@ -10,8 +24,22 @@
 
             Agregar producto</h1>
 
-            <form method="POST" action="{{route("productos.store")}}">
+            <form id="formulario1" method="POST" action="{{route("productos.store")}}">
                 @csrf
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
+                      </div>
+                      <select class="custom-select" id="inputGroupSelect01">
+                        <option value="0" selected hidden>Selecciona un proveedor</option>
+                        @foreach($proveedores as $datos)
+                            <option value="{{$datos['id']}}">{{ $datos['nombre']}}</option>
+                        @endforeach
+                      </select>
+                      <input type="hidden" name="idP" id="idP">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="label">Código de barras</label>
                     <input required autocomplete="off" name="codigo_barras" class="form-control"
@@ -40,7 +68,7 @@
                 <input type="hidden" name="id_socio" value="{{Auth::user()->id}}">
 
                 
-                <button class="btn btn-success">Guardar</button>
+                <button class="btn btn-success" type="button" onclick="checarP()">Guardar</button>
                 <a class="btn btn-primary" href="{{route("productos.index")}}">Volver al listado</a>
             </form>
         </div>
