@@ -40,7 +40,7 @@
                 <input type="hidden" name="id_socio" value="{{Auth::user()->id}}">
 
                 
-                <button class="btn btn-success" disabled>Guardar</button>
+                <button class="btn btn-success">Guardar</button>
                 <a class="btn btn-primary" href="{{route("productos.index")}}">Volver al listado</a>
             </form>
         </div>
