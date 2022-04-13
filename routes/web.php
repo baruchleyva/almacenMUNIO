@@ -27,4 +27,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('productos.index', [App\Http\Controllers\ProductosController::class, 'index'])->name('productos.index');
 Route::get('productos.create', [App\Http\Controllers\ProductosController::class, 'create'])->name('productos.create');
-Route::get('productos.store', [App\Http\Controllers\ProductosController::class, 'store'])->name('productos.store');
+Route::get('productos.edit', [App\Http\Controllers\ProductosController::class, 'edit'])->name('productos.edit');
+Route::get('productos.destroy', [App\Http\Controllers\ProductosController::class, 'destroy'])->name('productos.destroy');
+Route::post('productos.store', [App\Http\Controllers\ProductosController::class, 'store'])->name('productos.store');

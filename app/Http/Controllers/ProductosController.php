@@ -19,11 +19,12 @@ class ProductosController extends Controller
     public function index()
     {
 
-            //return view("productos.productos_index", ["productos" => Producto::all()]);
+            return view("productos.productos_index", ["productos" => Producto::all()]);
+
         //}else{
             //$productos = Producto::where('id_socio','=',Auth::user()->id)->get();
             //return view("productos.productos_index", compact('productos'));
-            return view("productos.productos_index");
+            //return view("productos.productos_index");
         //}
     }
 

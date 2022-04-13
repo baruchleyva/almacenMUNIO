@@ -74,30 +74,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!--@ foreach($productos as $producto)
+                    @foreach($productos as $producto)
                         <tr>
-                            <td>{ {$producto->codigo_barras}}</td>
-                            <td>{ {$producto->descripcion}}</td>
-                            <td>${ {$producto->precio_compra}}</td>
-                            <td>${ {$producto->precio_venta}}</td>
-                            <td>${ {number_format($producto->precio_venta - $producto->precio_compra,2)}}</td>
-                            <td>{ {number_format($producto->existencia,0)}}</td>
+                            <td>{{$producto->codigo_barras}}</td>
+                            <td>{{$producto->descripcion}}</td>
+                            <td>${{$producto->precio_compra}}</td>
+                            <td>${{$producto->precio_venta}}</td>
+                            <td>${{number_format($producto->precio_venta - $producto->precio_compra,2)}}</td>
+                            <td>{{number_format($producto->existencia,0)}}</td>
                             <td>
-                                <a class="btn btn-warning" href="{ {route("productos.edit",[$producto])}}">
+                                <a class="btn btn-warning" href="{{route("productos.edit",[$producto])}}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </td>
                             <td>
-                                <form action="{ {route("productos.destroy", [$producto])}}" method="post">
-                                    @ method("delete")
-                                    @ csrf
+                                <form action="{{route("productos.destroy", [$producto])}}" method="post">
+                                    @method("delete")
+                                    @csrf
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
                             </td>
                         </tr>
-                    @ endforeach-->
+                    @endforeach
                     </tbody>
                 </table>
             </div>
