@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +25,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('productos.index', [App\Http\Controllers\ProductosController::class, 'index'])->name('productos.index');
+Route::get('productos.create', [App\Http\Controllers\ProductosController::class, 'create'])->name('productos.create');
+Route::get('productos.store', [App\Http\Controllers\ProductosController::class, 'store'])->name('productos.store');

@@ -21,7 +21,7 @@
 
                 <!--<div class="sb-sidenav-menu-heading">Modulos</div>-->
                 <!-- Modulo de empleados -->
-                <a class="nav-link" href="#"  style="color:white;">
+                <a class="nav-link" href="{{route('productos.index')}}"  style="color:white;">
                     <i class='fas fa-archive'></i>
                     <div class="sb-nav-link-icon"></div>
                     <FONT COLOR="white">
