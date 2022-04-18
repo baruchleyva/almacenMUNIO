@@ -77,7 +77,7 @@
             <div class="icon">
             <span class="fas fa-paste"></span>
             </div>
-            <a href="#" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route("productos.panelReportes")}}" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
