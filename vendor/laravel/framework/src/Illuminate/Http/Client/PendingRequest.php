@@ -11,17 +11,15 @@ use GuzzleHttp\HandlerStack;
 use Illuminate\Http\Client\Events\ConnectionFailed;
 use Illuminate\Http\Client\Events\RequestSending;
 use Illuminate\Http\Client\Events\ResponseReceived;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
 use Psr\Http\Message\MessageInterface;
 use Symfony\Component\VarDumper\VarDumper;
 
 class PendingRequest
 {
-    use Conditionable, Macroable;
+    use Macroable;
 
     /**
      * The factory instance.
@@ -148,20 +146,6 @@ class PendingRequest
      * @var \Illuminate\Http\Client\Request|null
      */
     protected $request;
-
-    /**
-     * The Guzzle request options that are mergable via array_merge_recursive.
-     *
-     * @var array
-     */
-    protected $mergableOptions = [
-        'cookies',
-        'form_params',
-        'headers',
-        'json',
-        'multipart',
-        'query',
-    ];
 
     /**
      * Create a new HTTP Client instance.
@@ -390,9 +374,7 @@ class PendingRequest
      */
     public function withUserAgent($userAgent)
     {
-        return tap($this, function ($request) use ($userAgent) {
-            return $this->options['headers']['User-Agent'] = trim($userAgent);
-        });
+        return $this->withHeaders(['User-Agent' => $userAgent]);
     }
 
     /**
@@ -479,7 +461,7 @@ class PendingRequest
     }
 
     /**
-     * Replace the specified options on the request.
+     * Merge new options into the client.
      *
      * @param  array  $options
      * @return $this
@@ -487,10 +469,7 @@ class PendingRequest
     public function withOptions(array $options)
     {
         return tap($this, function ($request) use ($options) {
-            return $this->options = array_replace_recursive(
-                array_merge_recursive($this->options, Arr::only($options, $this->mergableOptions)),
-                $options
-            );
+            return $this->options = array_merge_recursive($this->options, $options);
         });
     }
 
@@ -563,7 +542,7 @@ class PendingRequest
      */
     public function get(string $url, $query = null)
     {
-        return $this->send('GET', $url, func_num_args() === 1 ? [] : [
+        return $this->send('GET', $url, [
             'query' => $query,
         ]);
     }
@@ -577,7 +556,7 @@ class PendingRequest
      */
     public function head(string $url, $query = null)
     {
-        return $this->send('HEAD', $url, func_num_args() === 1 ? [] : [
+        return $this->send('HEAD', $url, [
             'query' => $query,
         ]);
     }
@@ -989,26 +968,23 @@ class PendingRequest
     public function runBeforeSendingCallbacks($request, array $options)
     {
         return tap($request, function ($request) use ($options) {
-            $this->beforeSendingCallbacks->each(function ($callback) use ($request, $options) {
-                call_user_func(
-                    $callback, (new Request($request))->withData($options['laravel_data']), $options, $this
-                );
-            });
+            $this->beforeSendingCallbacks->each->__invoke(
+                (new Request($request))->withData($options['laravel_data']),
+                $options,
+                $this
+            );
         });
     }
 
     /**
-     * Replace the given options with the current request options.
+     * Merge the given options with the current request options.
      *
      * @param  array  $options
      * @return array
      */
     public function mergeOptions(...$options)
     {
-        return array_replace_recursive(
-            array_merge_recursive($this->options, Arr::only($options, $this->mergableOptions)),
-            ...$options
-        );
+        return array_merge_recursive($this->options, ...$options);
     }
 
     /**
@@ -1113,15 +1089,5 @@ class PendingRequest
         );
 
         return $this;
-    }
-
-    /**
-     * Get the pending request options.
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 
 trait RegistersUsers
 {
@@ -18,8 +19,11 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
+        // $data = Role::all();
+        // return view('auth.register', compact('data'));
         return view('auth.register');
     }
+
 
     /**
      * Handle a registration request for the application.

@@ -39,9 +39,9 @@ tr:nth-child(even) {
     <footer style="width: 100%; " id="footer">
     </footer>
        
-	<div class="titulo" ><img src="../public/img/logots.png" align="left" style="width: 120px; height: 60px;"> </div>
+	<div class="titulo" ><img src="{{asset('images/team.png')}}" align="left" style="width: 120px; height: 60px;"> </div>
 	<br>
-	<h3 align="left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inventario de productos TeamSide</h3> 
+	<h3 align="left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inventario de productos BMS</h3> 
 	<table>
 		<thead style="font-size: 8">
 			<tr>
@@ -51,6 +51,7 @@ tr:nth-child(even) {
                         <th>Precio de venta</th>
                         <th>Precio de compra</th>
                         <th>Existencia</th>
+                        <th>Fecha de registro</th>
                         
                        
 		   </tr>
@@ -58,7 +59,7 @@ tr:nth-child(even) {
 		
 		<tbody>
 			
-			@foreach($inv as $v)
+			@foreach($product as $v)
 			<tr>
 				<!--<td td style="text-align: center;">{ {$v['id']}}</td>-->
 				<td style="font-size: 8">{{$v['codigo_barras']}}</td>
@@ -66,6 +67,7 @@ tr:nth-child(even) {
 				<td style="font-size: 8">${{$v['precio_venta']}}</td>
 				<td style="font-size: 8">${{$v['precio_compra']}}</td>
 				<td style="text-align: center; font-size: 8;">{{number_format($v['existencia'])}}</td>
+				<td style="text-align: center; font-size: 8;">{{$v['created_at']}}</td>
 				
 
 			</tr>
@@ -75,6 +77,6 @@ tr:nth-child(even) {
 		</tbody>
 	</table>
 	<br>
-<h5>Teamside Consulting y Asociados 2021</h5>
+<h5>BMS Software Solutions 2022</h5>
 </body>
 </html>

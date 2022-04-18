@@ -57,7 +57,7 @@
                     </FONT>
                 </a>
 
-                <a class="nav-link" href="" style="color:white;">
+                <a class="nav-link" href="{{route("productos.panelReportes")}}" style="color:white;">
                     <i class='fas fa-paste'></i>
                     <div class="sb-nav-link-icon"></div>
                     <font color="white">

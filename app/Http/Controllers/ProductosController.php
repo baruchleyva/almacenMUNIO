@@ -9,7 +9,7 @@ use App\Proveedors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use PDF;
 class ProductosController extends Controller
 {
     /**
@@ -127,4 +127,69 @@ class ProductosController extends Controller
         $producto->delete();
         return redirect()->route("productos.index")->with("mensaje", "Producto eliminado");
     }
+
+    public function panelReportes()
+    {
+        $query = "SELECT p.codigo_barras,p.descripcion,p.precio_compra,p.precio_venta,p.existencia,p.created_at FROM productos p";
+        $produc = DB::SELECT($query);
+            //->get();
+        //return view("ventas.ventas_index", ["ventas" => $ventasConTotales,]);
+        $productos = [];
+        foreach ($produc as $list) {
+            $codigo_barras = $list->codigo_barras;
+            $descripcion = $list->descripcion;
+            $precio_compra = $list->precio_compra;
+            $precio_venta = $list->precio_venta;
+            $existencia = $list->existencia;
+            $created_at = $list->created_at;
+            
+            array_push($productos, [
+                'codigo_barras' => $codigo_barras,
+                'descripcion' => $descripcion,
+                'precio_compra' => $precio_compra,
+                'precio_venta' => $precio_venta,
+                'existencia' => $existencia,
+                'created_at' => $created_at]);
+            # code... 
+        }
+
+        return view('productos.productos_reporte', compact('productos'));
+        
+           
+         
+    }
+
+public function reporte()
+    {
+        $query = "SELECT p.codigo_barras,p.descripcion,p.precio_compra,p.precio_venta,p.existencia,p.created_at FROM productos p";
+        $productos = DB::SELECT($query);
+            //->get();
+        //return view("ventas.ventas_index", ["ventas" => $ventasConTotales,]);
+        $product = [];
+        foreach ($productos as $list) {
+            $codigo_barras = $list->codigo_barras;
+            $descripcion = $list->descripcion;
+            $precio_compra = $list->precio_compra;
+            $precio_venta = $list->precio_venta;
+            $existencia = $list->existencia;
+            $created_at = $list->created_at;
+            
+            array_push($product, [
+                'codigo_barras' => $codigo_barras,
+                'descripcion' => $descripcion,
+                'precio_compra' => $precio_compra,
+                'precio_venta' => $precio_venta,
+                'existencia' => $existencia,
+                'created_at' => $created_at]);
+            # code... 
+        }
+
+
+        $data= compact('product');
+        $pdf = PDF::loadView('pdf.inventario', $data);
+        return $pdf->download('reporte_inventario.pdf');
+           
+         
+    }
+
 }
