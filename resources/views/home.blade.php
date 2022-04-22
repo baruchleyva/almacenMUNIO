@@ -43,7 +43,7 @@
             <div class="icon">
             <span class="fas fa-clipboard"></span>
             </div>
-            <a href="{{route('productos.index')}}" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('inventario.index')}}" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

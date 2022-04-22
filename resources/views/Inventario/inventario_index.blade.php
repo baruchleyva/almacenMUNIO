@@ -62,7 +62,7 @@
                 </div>
                 <div class="row" style="float: right;">
                     <div class="col-12">
-                        <a href="#" class="btn btn-danger mb-2">Entradas</a>
+                        <a href="{{route("inventario.create")}}" class="btn btn-danger mb-2">Entradas</a>
                         <a href="#" class="btn btn-danger mb-2">Salidas</a>
                     </div>
                 </div>
@@ -80,36 +80,33 @@
                         <!--<th>Utilidad</th>
                         <th>Existencia</th>-->
 
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <!--<th>Editar</th>
+                        <th>Eliminar</th>-->
                     </tr>
                     </thead>
                     <tbody>
-                   <!-- @ foreach($productos as $producto)
+                    @foreach($productos as $producto)
                         <tr>
-                            <td>{ {$producto->codigo_barras}}</td>
-                            <td>{ {$producto->descripcion}}</td>
-                            <td>${ {$producto->precio_compra}}</td>
-                            <td>${ {$producto->precio_venta}}</td>
-                            <td>${ {number_format($producto->precio_venta - $producto->precio_compra,2)}}</td>
-                            <td>{ {number_format($producto->existencia,0)}}</td>
-                            <td>
-                                <a class="btn btn-warning" href="{ {route("productos.edit",[$producto])}}">
+                            <td>{{$producto['descripcion']}}</td>
+                            <td>{{$producto->nombre}}</td>
+                            <td>{{$producto['existencia']}}</td>
+                            <!--<td>
+                                <a class="btn btn-warning" href="{ {route("inventario.edit",[$producto])}}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </td>
                             <td>
-                                <form action="{ {route("productos.destroy", [$producto])}}" method="post">
+                                <form action="{ {route("inventario.destroy", [$producto])}}" method="post">
                                     @ method("delete")
                                     @ csrf
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
-                            </td>
+                            </td>-->
                         </tr>
-                     @ endforeach
-                    </tbody>-->
+                     @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Proveedors;
+use App\Producto;
+use App\Inventarios;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class inventarioController extends Controller
 {
@@ -14,7 +17,13 @@ class inventarioController extends Controller
      */
     public function index()
     {
-        return view("Inventario.inventario_index");
+
+        $productos = Inventarios::select('productos.descripcion', 'proveedors.nombre', 'inventarios.existencia')
+                ->join('productos', 'productos.id', '=', 'id_producto')
+                ->join('proveedors', 'proveedors.id', '=', 'id_proveedor')
+                ->get();
+        //$productos = DB::SELECT($pro);
+        return view("Inventario.inventario_index", compact('productos'));
     }
 
     /**
@@ -24,7 +33,8 @@ class inventarioController extends Controller
      */
     public function create()
     {
-        return view("Inventario.inventario_create");
+
+        return view("Inventario.inventario_create", ["productos" => Producto::all(), "proveedores" => Proveedors::all()]);
     }
 
     /**
@@ -35,8 +45,8 @@ class inventarioController extends Controller
      */
     public function store(Request $request)
     {
-        (new Proveedors($request->input()))->saveOrFail();
-        return redirect()->route("proveedors.index")->with("mensaje", "Proveedor agregado");
+        (new Inventarios($request->input()))->saveOrFail();
+        return redirect()->route("inventario.index")->with("mensaje", "Entrada agregada correctamente");
     }
 
     /**

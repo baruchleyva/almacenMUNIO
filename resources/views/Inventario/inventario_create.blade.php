@@ -7,71 +7,67 @@
     function checarP() {
         // body...
         var id_pro = $('#inputGroupSelect01').val();
+        var id_prov = $('#inputGroupSelect02').val();
         //console.log(id_pro);
-        //$('#idP').val(id_pro);
-        $a = $('#idP').val();
-        console.log($a);
-        if($a != ''){
+        $('#id_producto').val(id_pro);
+        $('#id_proveedor').val(id_prov);
+        $a = $('#id_producto').val();
+        $b = $('#id_proveedor').val();
+        //console.log(id_pro);
+        //console.log(id_prov);
+        if($a != '' && $b != ''){
             document.getElementById('formulario1').submit();
         }
 
     }
 </script>
     <div class="row">
-        <div class="col-12">
-            <h1>
-                <br>
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h1 align="center"><br>Agregar Entrada</h1>
 
-            Agregar producto</h1>
-
-            <form id="formulario1" method="POST" action="{{route("productos.store")}}">
+            <form id="formulario1" method="POST" action="{{route("inventario.store")}}">
                 @csrf
-                <!--<div class="form-group">
+                <div class="form-group">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
+                        <label class="input-group-text" for="inputGroupSelect01">Productos</label>
                       </div>
                       <select class="custom-select" id="inputGroupSelect01">
-                        <option value="0" selected hidden>Selecciona un proveedor</option>
-                        @ foreach($proveedores as $datos)
-                            <option value="{ {$datos['id']}}">{ { $datos['nombre']}}</option>
-                        @ endforeach
+                        <option value="0" selected hidden>Selecciona un producto</option>
+                        @foreach($productos as $datos)
+                            <option value="{{$datos['id']}}">{{ $datos['descripcion']}}</option>
+                        @endforeach
                       </select>
-                      <input type="hidden" name="idP" id="idP">
+                      <div style="display:none;"><input type="text" name="id_producto" id="id_producto"></div>
                     </div>
-                </div>-->
-                <input type="hidden" name="idP" id="idP" value="0">
-                <div class="form-group">
-                    <label class="label">Código de barras</label>
-                    <input required autocomplete="off" name="codigo_barras" class="form-control"
-                           type="text" placeholder="Código de barras" autofocus>
                 </div>
                 <div class="form-group">
-                    <label class="label">Descripción</label>
-                    <input required autocomplete="off" name="descripcion" class="form-control"
-                           type="text" placeholder="Descripción">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect02">Proveedores</label>
+                      </div>
+                      <select class="custom-select" id="inputGroupSelect02">
+                        <option value="0" selected hidden>Selecciona un proveedor</option>
+                        @foreach($proveedores as $datos)
+                            <option value="{{$datos['id']}}">{{ $datos['nombre']}}</option>
+                        @endforeach
+                      </select>
+                      <div style="display:none;"><input type="text" name="id_proveedor" id="id_proveedor"></div>
+                    </div>
                 </div>
-                <!--<div class="form-group">
-                    <label class="label">Precio de compra</label>-->
-                    <input required autocomplete="off" name="precio_compra" class="form-control"
-                           type="hidden" placeholder="Precio de compra" value="0">
-                <!--</div>-->
+
                 <div class="form-group">
-                    <label class="label">Precio de Unitario</label>
-                    <input required autocomplete="off" name="precio_venta" class="form-control"
-                           type="decimal(9,2)" placeholder="Precio de unitario">
-                </div>
-                <!--<div class="form-group">
-                    <label class="label">Existencia</label>-->
+                    <label class="label">Existencia</label>
                     <input  autocomplete="off" name="existencia" id="existencia" class="form-control"
-                           type="hidden" placeholder="Existencia" value="0">
-                <!--</div>-->
+                           type="text" placeholder="Existencia" >
+                </div>
 
                 <input type="hidden" name="id_socio" value="{{Auth::user()->id}}">
 
                 
                 <button class="btn btn-success" type="button" onclick="checarP()">Guardar</button>
-                <a class="btn btn-primary" href="{{route("productos.index")}}">Volver al listado</a>
+                <a class="btn btn-primary" href="{{route("inventario.index")}}">Volver al listado</a>
             </form>
         </div>
     </div>
