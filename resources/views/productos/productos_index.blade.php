@@ -36,7 +36,7 @@
         <div class="col-12">
             <h1>
                 <br>
-                Productos / Inventario <i class="fa fa-box"></i></h1>
+                Productos <i class="fa fa-box"></i></h1>
                 <div class="row">
                     <div class="col-4">
                         <div class="input-group mb-3">
@@ -67,7 +67,7 @@
                         <th>Precio de compra</th>
                         <th>Precio de venta</th>
                         <th>Utilidad</th>
-                        <th>Existencia</th>
+                        <!--<th>Existencia</th>-->
 
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -81,7 +81,7 @@
                             <td>${{$producto->precio_compra}}</td>
                             <td>${{$producto->precio_venta}}</td>
                             <td>${{number_format($producto->precio_venta - $producto->precio_compra,2)}}</td>
-                            <td>{{number_format($producto->existencia,0)}}</td>
+                            <!--<td>{ {number_format($producto->existencia,0)}}</td>-->
                             <td>
                                 <a class="btn btn-warning" href="{{route("productos.edit",[$producto])}}">
                                     <i class="fa fa-edit"></i>
