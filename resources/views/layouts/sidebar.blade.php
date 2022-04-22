@@ -25,7 +25,14 @@
                     <i class='fas fa-archive'></i>
                     <div class="sb-nav-link-icon"></div>
                     <FONT COLOR="white">
-                    Productos / Inventario
+                    Productos
+                    </FONT>
+                </a>
+                <a class="nav-link" href="{{route('inventario.index')}}"  style="color:white;">
+                    <i class='fas fa-archive'></i>
+                    <div class="sb-nav-link-icon"></div>
+                    <FONT COLOR="white">
+                    Inventario
                     </FONT>
                 </a>
                 <!--<div class="collapse" id="menuEmpleados" aria-labelledby="headingOne" data-parent="#sidenavAccordion">

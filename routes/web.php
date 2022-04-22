@@ -25,6 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Route::resource("productos", "ProductosController");
 Route::resource('productos', '\App\Http\Controllers\ProductosController');
 Route::resource('proveedors', '\App\Http\Controllers\ProveedoresController');
+Route::resource('inventario', '\App\Http\Controllers\InventarioController');
 Route::get('productos.panelReportes', [App\Http\Controllers\ProductosController::class, 'panelReportes'])->name('productos.panelReportes');
 Route::get('productos.reporte', [App\Http\Controllers\ProductosController::class, 'reporte'])->name('productos.reporte');
 /*

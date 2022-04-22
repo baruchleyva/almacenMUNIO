@@ -32,14 +32,14 @@
 
     });
 </script>
+
     <div class="row">
         <div class="col-12">
             <h1>
                 <br>
-                Productos <i class="fa fa-box"></i></h1>
+                Inventario <i class="fa fa-box"></i></h1>
                 <div class="row">
-                    <div class="col-4">
-                        <div class="input-group mb-3">
+                    <div class="col-12">
                             <!--<div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect01">Filtrar</label>
                             </div>
@@ -49,10 +49,21 @@
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                           </select>-->
-                        </div>
+                          <a href="{{route("productos.index")}}" class="btn btn-success mb-2">Productos</a>
+                          <a href="{{route("productos.create")}}" class="btn btn-primary mb-2">Nuevo Producto</a>
+                          <a href="{{route("proveedors.index")}}" class="btn btn-warning mb-2">Proveedores</a>
+                          <a href="{{route("proveedors.create")}}" class="btn btn-secondary mb-2">Nuevo Proveedor</a>
+                          <a href="#" class="btn btn-info mb-2">Areas</a>
+
                     </div>
-                    <div class="col-8" align="right">
-                        <a href="{{route("productos.create")}}" class="btn btn-success mb-2">Agregar</a>
+                    <!--<div class="col-8" align="right">
+                        <a href="{ {route("productos.create")}}" class="btn btn-success mb-2">Agregar</a>
+                    </div>-->
+                </div>
+                <div class="row" style="float: right;">
+                    <div class="col-12">
+                        <a href="#" class="btn btn-danger mb-2">Entradas</a>
+                        <a href="#" class="btn btn-danger mb-2">Salidas</a>
                     </div>
                 </div>
 
@@ -62,10 +73,10 @@
                 <table id="example" class="table table-striped table-bordered" >
                     <thead>
                     <tr>
-                        <th>Código de barras</th>
-                        <th>Descripción</th>
+                        <th>Producto</th>
+                        <th>Proveedor</th>
                         <!--<th>Precio de compra</th>-->
-                        <th>Precio de unitario</th>
+                        <th>Cantidad</th>
                         <!--<th>Utilidad</th>
                         <th>Existencia</th>-->
 
@@ -74,31 +85,31 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($productos as $producto)
+                   <!-- @ foreach($productos as $producto)
                         <tr>
-                            <td>{{$producto->codigo_barras}}</td>
-                            <td>{{$producto->descripcion}}</td>
-                            <!--<td>${ {$producto->precio_compra}}</td>-->
-                            <td>${{$producto->precio_venta}}</td>
-                            <!--<td>${ {number_format($producto->precio_venta - $producto->precio_compra,2)}}</td>-->
-                            <!--<td>{ {number_format($producto->existencia,0)}}</td>-->
+                            <td>{ {$producto->codigo_barras}}</td>
+                            <td>{ {$producto->descripcion}}</td>
+                            <td>${ {$producto->precio_compra}}</td>
+                            <td>${ {$producto->precio_venta}}</td>
+                            <td>${ {number_format($producto->precio_venta - $producto->precio_compra,2)}}</td>
+                            <td>{ {number_format($producto->existencia,0)}}</td>
                             <td>
-                                <a class="btn btn-warning" href="{{route("productos.edit",[$producto])}}">
+                                <a class="btn btn-warning" href="{ {route("productos.edit",[$producto])}}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </td>
                             <td>
-                                <form action="{{route("productos.destroy", [$producto])}}" method="post">
-                                    @method("delete")
-                                    @csrf
+                                <form action="{ {route("productos.destroy", [$producto])}}" method="post">
+                                    @ method("delete")
+                                    @ csrf
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
-                    </tbody>
+                     @ endforeach
+                    </tbody>-->
                 </table>
             </div>
         </div>

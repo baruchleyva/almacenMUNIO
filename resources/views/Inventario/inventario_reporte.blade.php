@@ -1,4 +1,3 @@
-
 @extends('layouts.aplicacion')
 
 @section("content")
@@ -36,10 +35,10 @@
         <div class="col-12">
             <h1>
                 <br>
-                Productos <i class="fa fa-box"></i></h1>
+                Reportes <i class="fas fa-paste"></i></h1>
                 <div class="row">
                     <div class="col-4">
-                        <div class="input-group mb-3">
+                        
                             <!--<div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect01">Filtrar</label>
                             </div>
@@ -49,11 +48,12 @@
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                           </select>-->
-                        </div>
+                          
+                        &nbsp;&nbsp;<a href="{{route("productos.reporte")}}" class="btn btn-danger mb-2">Descargar Reporte <i class='fas fa-file-pdf'></i></a>
+                    
+                        
                     </div>
-                    <div class="col-8" align="right">
-                        <a href="{{route("productos.create")}}" class="btn btn-success mb-2">Agregar</a>
-                    </div>
+                    
                 </div>
 
 
@@ -64,38 +64,25 @@
                     <tr>
                         <th>Código de barras</th>
                         <th>Descripción</th>
-                        <!--<th>Precio de compra</th>-->
-                        <th>Precio de unitario</th>
-                        <!--<th>Utilidad</th>
-                        <th>Existencia</th>-->
+                        <th>Precio de compra</th>
+                        <th>Precio de venta</th>
+                        <th>Utilidad</th>
+                        <th>Existencia</th>
+                        <th>Fecha de registro</th>
 
-                        <th>Editar</th>
-                        <th>Eliminar</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($productos as $producto)
                         <tr>
-                            <td>{{$producto->codigo_barras}}</td>
-                            <td>{{$producto->descripcion}}</td>
-                            <!--<td>${ {$producto->precio_compra}}</td>-->
-                            <td>${{$producto->precio_venta}}</td>
-                            <!--<td>${ {number_format($producto->precio_venta - $producto->precio_compra,2)}}</td>-->
-                            <!--<td>{ {number_format($producto->existencia,0)}}</td>-->
-                            <td>
-                                <a class="btn btn-warning" href="{{route("productos.edit",[$producto])}}">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <form action="{{route("productos.destroy", [$producto])}}" method="post">
-                                    @method("delete")
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
+                            <td>{{$producto['codigo_barras']}}</td>
+                            <td>{{$producto['descripcion']}}</td>
+                            <td>${{$producto['precio_compra']}}</td>
+                            <td>${{$producto['precio_venta']}}</td>
+                            <td>${{number_format($producto['precio_venta'] - $producto['precio_compra'],2)}}</td>
+                            <td>{{number_format($producto['existencia'],0)}}</td>
+                            <td>{{$producto['created_at']}}</td>
+                           
                         </tr>
                     @endforeach
                     </tbody>
