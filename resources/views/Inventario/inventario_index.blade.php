@@ -53,7 +53,7 @@
                           <a href="{{route("productos.create")}}" class="btn btn-primary mb-2">Nuevo Producto</a>
                           <a href="{{route("proveedors.index")}}" class="btn btn-warning mb-2">Proveedores</a>
                           <a href="{{route("proveedors.create")}}" class="btn btn-secondary mb-2">Nuevo Proveedor</a>
-                          <a href="#" class="btn btn-info mb-2">Areas</a>
+                          <a href="{{route("areas.index")}}" class="btn btn-info mb-2">Areas</a>
 
                     </div>
                     <!--<div class="col-8" align="right">
@@ -63,7 +63,7 @@
                 <div class="row" style="float: right;">
                     <div class="col-12">
                         <a href="{{route("inventario.create")}}" class="btn btn-danger mb-2">Entradas</a>
-                        <a href="#" class="btn btn-danger mb-2">Salidas</a>
+                        <a href="{{route("inventario.salidas")}}" class="btn btn-danger mb-2">Salidas</a>
                     </div>
                 </div>
 

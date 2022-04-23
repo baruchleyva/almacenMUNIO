@@ -13,6 +13,9 @@
         $('#id_proveedor').val(id_prov);
         $a = $('#id_producto').val();
         $b = $('#id_proveedor').val();
+
+        $ex = $('#existencia').val();
+        $('#cantidad').val($ex);
         //console.log(id_pro);
         //console.log(id_prov);
         if($a != '' && $b != ''){
@@ -58,11 +61,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="label">Existencia</label>
+                    <label class="label">Cantidad Entregada</label>
                     <input  autocomplete="off" name="existencia" id="existencia" class="form-control"
-                           type="text" placeholder="Existencia" >
-                </div>
+                           type="text" placeholder="Cantidad Entregada" >
 
+                </div>
+                <input name="cantidad" id="cantidad" class="form-control" type="hidden">
                 <input type="hidden" name="id_socio" value="{{Auth::user()->id}}">
 
                 
