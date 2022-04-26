@@ -8,11 +8,15 @@
         // body...
         var id_pro = $('#inputGroupSelect01').val();
         var id_prov = $('#inputGroupSelect02').val();
+        
         //console.log(id_pro);
         $('#id_inv').val(id_pro);
         $('#id_area').val(id_prov);
         $a = $('#id_inv').val();
         $b = $('#id_area').val();
+
+        var id_inv= $a;
+        var id_area = $b;
         //console.log($a+" "+$b);
         //console.log(id_prov);
 
@@ -20,16 +24,30 @@
         aaa += id_pro;
         var cant = parseInt(document.getElementById(aaa).value); //$(aaa).val();
         console.log(cant);
-        var ex = parseInt($('#existencia').val());
-        console.log(ex);
+        var existencia = parseInt($('#existencia').val());
+        console.log(existencia);
 
-        if(ex > cant){
+        if(existencia > cant){
             alert('La cantidad solicitada de productos supera el número que se tiene en el inventario.');
             //console.log('No agrega');
             /**/
         }else{
             if($a != '' && $b != ''){
-                document.getElementById('formulario1').submit();
+
+                $.ajax({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('inventario.store2') }}",
+        type:"post",
+        data: {id_inv:id_inv,id_area:id_area,existencia:existencia},
+        success: function(result){
+          console.log(result);
+          window.location.href = '/inventario.salidas';
+        }
+      });
+
+       
                 //console.log('Si agrega')
             }
         }
@@ -93,4 +111,60 @@
             </form>
         </div>
     </div>
+    <br>
+    <h2>&nbsp;&nbsp;Salidas Registradas</h2>
+<div align='center' class="table-responsive col-md-12 order-md-1">
+   <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" aria-describedby="example_info" role="grid" style="width: 100%; ">
+                    <thead style="text-align: center;" class="thead-dark" id="panel">
+                        <tr>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Folio Salida</th>
+
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Area a la que se entregó</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad entregada</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Fecha de entrega</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Descargar reporte</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- <input type="hidden" value="{{ $contador = 1 }}"> -->
+                        @foreach ($salidas as $dato)
+                        <tr>
+
+
+                            <td align="center">{{$dato->id}}</td>
+                            <td align="center">{{$dato->id_inv}}</td>
+                            <td align="center" style="display: none;">{{$dato->id_area}}</td>
+                            <td align="center">{{$dato->area}}</td>
+                            <td align="center">{{$dato->existencia}}</td>
+                            <td align="center">{{$dato->created_at}}</td>
+                            
+
+                             <td align="center">
+                              <form action="{{route('inventario.descargarPDF')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id_a" id="id_a" value="{{$dato->id_area}}">
+                                    <input type="hidden" name="desc" id="desc" value="{{$dato->id_inv}}">
+                                    <input type="hidden" name="ca" id="ca" value="{{$dato->existencia}}">
+                                    <input type="hidden" name="created_at" id="created_at" value="{{$dato->created_at}}">
+
+                                    <button class="btn btn-primary" type="submit" style="background-color: #De1428; border-color: #De1428;"> <i class='fas fa-file-pdf'></i>
+
+                                   </button>
+
+                                </form>
+
+
+                            </td>
+
+
+                        </tr>
+
+                        @endforeach
+                    </tbody>
+                </table>
+</div>
 @endsection

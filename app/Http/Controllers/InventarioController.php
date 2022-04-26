@@ -53,7 +53,15 @@ class inventarioController extends Controller
                     GROUP BY productos.descripcion";
             $productos = DB::SELECT($p);
             $proveedores = Areas::all();
-        return view("Inventario.inventario_salidas", compact('productos','proveedores'));
+
+            $s="SELECT s.id, s.id_inv,s.id_area,a.area, s.existencia,s.created_at FROM inventario_salidas s
+LEFT JOIN areas a ON a.id=s.id_area
+ORDER BY s.created_at asc";
+
+        $salidas = DB::SELECT($s);
+
+
+        return view("Inventario.inventario_salidas", compact('productos','proveedores','salidas'));
     }
 
     /**
@@ -69,7 +77,8 @@ class inventarioController extends Controller
     }
     public function store2(Request $request)
     {
-        $descripcion = $request->get('id_inv');
+         if($request->ajax()){
+                $descripcion = $request->get('id_inv');
         $id_area = $request->get('id_area');
         $cantidad = $request->get('existencia');//20
         $cant = $request->get('existencia');//20
@@ -96,27 +105,32 @@ class inventarioController extends Controller
         }
 
 
-        $area = Areas::select('area')->where('id','=',$id_area)->get();
-        $descripcion = Producto::select('descripcion')->where('descripcion','=',$descripcion)->get();
-        $cant = $cant;
-        $pdf = PDF::loadView('pdf.salida_inv', compact('area', 'descripcion', 'cant'));
-        return $pdf->download('salida_inventario.pdf');
+        (new Inventario_salidas($request->input()))->saveOrFail();
+        
         //$this->descargarPDF($descripcion,$id_area,$cant);
-
+        
 
         //$this->descargarPDF($descripcion, $id_area, $cantidad);
         //return redirect()->route("inventario.index")->with("mensaje", "Salida agregada correctamente");
 
-        (new Inventario_salidas($request->input()))->saveOrFail();
-        return redirect()->route("inventario.index")->with("mensaje", "Salida agregada correctamente");
+       
+         }
+
+        return "exito";
+        //return redirect()->route("inventario.index")->with("mensaje", "Salida agregada correctamente");
     }
 
-    public function descargarPDF($descripcion, $id_area, $cant)
+    public function descargarPDF(Request $request)
     {
+        $descripcion = $request->get('desc');
+        $id_area = $request->get('id_a');
+        $cant= $request->get('ca');
+        $created_at= $request->get('created_at');
+
         $area = Areas::select('area')->where('id','=',$id_area)->get();
         $descripcion = Producto::select('descripcion')->where('descripcion','=',$descripcion)->get();
         $cant = $cant;
-        $pdf = PDF::loadView('pdf.salida_inv', compact('area', 'descripcion', 'cant'));
+        $pdf = PDF::loadView('pdf.salida_inv', compact('area', 'descripcion', 'cant','created_at'));
         return $pdf->download('salida_inventario.pdf');
     }
 

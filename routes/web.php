@@ -31,6 +31,7 @@ Route::get('productos.panelReportes', [App\Http\Controllers\ProductosController:
 Route::get('productos.reporte', [App\Http\Controllers\ProductosController::class, 'reporte'])->name('productos.reporte');
 Route::get('inventario.salidas', [App\Http\Controllers\InventarioController::class, 'salidas'])->name('inventario.salidas');
 Route::post('inventario.store2', [App\Http\Controllers\InventarioController::class, 'store2'])->name('inventario.store2');
+Route::post('inventario.descargarPDF', [App\Http\Controllers\InventarioController::class, 'descargarPDF'])->name('inventario.descargarPDF');
 /*
 Route::get('productos.index', [App\Http\Controllers\ProductosController::class, 'index'])->name('productos.index');
 Route::get('productos.create', [App\Http\Controllers\ProductosController::class, 'create'])->name('productos.create');
