@@ -86,12 +86,12 @@ class inventarioController extends Controller
                 $exis = $exis - $cantidad;
                 $cantidad = 0;
                 //update
-                //Inventarios::where('id','=',$id)->update(['cantidad' => $exis]);
+                Inventarios::where('id','=',$id)->update(['cantidad' => $exis]);
             }else{
                 $cantidad = $cantidad-$exis;//10
                 $exis = 0;
                 //update
-                //Inventarios::where('id','=',$id)->update(['cantidad' => $exis]);
+                Inventarios::where('id','=',$id)->update(['cantidad' => $exis]);
             }
         }
 
