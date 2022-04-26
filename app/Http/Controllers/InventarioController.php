@@ -9,6 +9,7 @@ use App\Areas;
 use App\Inventario_salidas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class inventarioController extends Controller
 {
@@ -71,6 +72,7 @@ class inventarioController extends Controller
         $descripcion = $request->get('id_inv');
         $id_area = $request->get('id_area');
         $cantidad = $request->get('existencia');//20
+        $cant = $request->get('existencia');//20
 
         $query = "SELECT i.id, p.descripcion, i.existencia, i.cantidad FROM inventarios i INNER JOIN productos p ON p.id = i.id_producto WHERE p.descripcion = '$descripcion'";
         $datosQ = DB::SELECT($query);
@@ -84,19 +86,33 @@ class inventarioController extends Controller
                 $exis = $exis - $cantidad;
                 $cantidad = 0;
                 //update
-                Inventarios::where('id','=',$id)->update(['cantidad' => $exis]);
+                //Inventarios::where('id','=',$id)->update(['cantidad' => $exis]);
             }else{
                 $cantidad = $cantidad-$exis;//10
                 $exis = 0;
                 //update
-                Inventarios::where('id','=',$id)->update(['cantidad' => $exis]);
+                //Inventarios::where('id','=',$id)->update(['cantidad' => $exis]);
             }
         }
 
+
+        $this->descargarPDF($descripcion,$id_area,$cant);
+
+
+        //$this->descargarPDF($descripcion, $id_area, $cantidad);
         //return redirect()->route("inventario.index")->with("mensaje", "Salida agregada correctamente");
 
         (new Inventario_salidas($request->input()))->saveOrFail();
         return redirect()->route("inventario.index")->with("mensaje", "Salida agregada correctamente");
+    }
+
+    public function descargarPDF($descripcion, $id_area, $cant)
+    {
+        $area = Areas::select('area')->where('id','=',$id_area)->get();
+        $descripcion = Producto::select('descripcion')->where('descripcion','=',$descripcion)->get();
+        $cant = $cant;
+        $pdf = PDF::loadView('pdf.salida_inv', compact('area', 'descripcion', 'cant'));
+        return $pdf->download('salida_inventario.pdf');
     }
 
     /**
