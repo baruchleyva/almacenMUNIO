@@ -96,7 +96,12 @@ class inventarioController extends Controller
         }
 
 
-        $this->descargarPDF($descripcion,$id_area,$cant);
+        $area = Areas::select('area')->where('id','=',$id_area)->get();
+        $descripcion = Producto::select('descripcion')->where('descripcion','=',$descripcion)->get();
+        $cant = $cant;
+        $pdf = PDF::loadView('pdf.salida_inv', compact('area', 'descripcion', 'cant'));
+        return $pdf->download('salida_inventario.pdf');
+        //$this->descargarPDF($descripcion,$id_area,$cant);
 
 
         //$this->descargarPDF($descripcion, $id_area, $cantidad);
