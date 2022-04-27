@@ -110,7 +110,7 @@
 
 
                              <td align="center">
-                              <form action="{{route('inventario.descargarPDF')}}" method="post">
+                              <form action="{{route('inventario.descargarPDF2')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="id" id="id" value="{{$dato->id}}">
                                     <input type="hidden" name="desc" id="desc" value="{{$dato->descripcion}}">

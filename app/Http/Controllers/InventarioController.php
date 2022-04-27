@@ -52,7 +52,8 @@ class inventarioController extends Controller
                         inventarios.created_at
                         from inventarios
                         inner join productos on productos.id = inventarios.id_producto
-                        INNER JOIN proveedors ON proveedors.id = inventarios.id_proveedor";
+                        INNER JOIN proveedors ON proveedors.id = inventarios.id_proveedor
+                        ORDER BY inventarios.created_at DESC";
         $entradas = DB::SELECT($query);
 
         return view("Inventario.inventario_create", compact('productos','proveedores','entradas'));
@@ -91,7 +92,7 @@ ORDER BY s.created_at asc";
     public function store(Request $request)
     {
         (new Inventarios($request->input()))->saveOrFail();
-        return redirect()->route("inventario.index")->with("mensaje", "Entrada agregada correctamente");
+        return redirect()->route("inventario.create")->with("mensaje", "Entrada agregada correctamente");
     }
     public function store2(Request $request)
     {
@@ -150,6 +151,23 @@ ORDER BY s.created_at asc";
         $cant = $cant;
         $pdf = PDF::loadView('pdf.salida_inv', compact('area', 'descripcion', 'cant','created_at'));
         return $pdf->download('salida_inventario.pdf');
+    }
+
+    public function descargarPDF2(Request $request)
+    {
+        
+        $id = $request->get('id');
+        $descripcion = $request->get('desc');
+        $nombre= $request->get('nom');
+        $exist= $request->get('ex');
+        $cant= $request->get('can');
+        $created_at= $request->get('created_at');
+
+        //$area = Areas::select('area')->where('id','=',$id_area)->get();
+        //$descripcion = Producto::select('descripcion')->where('descripcion','=',$descripcion)->get();
+        $cant = $cant;
+        $pdf = PDF::loadView('pdf.entrada_inv', compact('id', 'descripcion', 'nombre','exist','cant','created_at'));
+        return $pdf->download('entrada_inventario.pdf');
     }
 
     /**
