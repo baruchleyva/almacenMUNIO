@@ -42,40 +42,84 @@ tr:nth-child(even) {
 	<div class="titulo" ><img src="{{asset('images/team.png')}}" align="left" style="width: 120px; height: 60px;"> </div>
 	<br>
 	<h3 align="left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inventario de productos BMS</h3> 
-	<table>
-		<thead style="font-size: 8">
-			<tr>
-			            
-                        <th>Codigo de barras</th>
-                        <th>Descripción</th>
-                        <th>Precio de venta</th>
-                        <th>Precio de compra</th>
-                        <th>Existencia</th>
-                        <th>Fecha de registro</th>
-                        
-                       
-		   </tr>
-		</thead>
-		
-		<tbody>
-			
-			@foreach($product as $v)
-			<tr>
-				<!--<td td style="text-align: center;">{ {$v['id']}}</td>-->
-				<td style="font-size: 8">{{$v['codigo_barras']}}</td>
-				<td style="font-size: 8">{{$v['descripcion']}}</td>
-				<td style="font-size: 8">${{$v['precio_venta']}}</td>
-				<td style="font-size: 8">${{$v['precio_compra']}}</td>
-				<td style="text-align: center; font-size: 8;">{{number_format($v['existencia'])}}</td>
-				<td style="text-align: center; font-size: 8;">{{$v['created_at']}}</td>
-				
+	<div align='center' class="table-responsive col-md-12 order-md-1">
+   <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" aria-describedby="example_info" role="grid" style="width: 100%; ">
+                    <thead style="text-align: center;" class="thead-dark" id="panel">
+                        <tr>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Codigo de barras</th>
 
-			</tr>
-                  
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Proveedor</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad recibida</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad restante por producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Fecha de entrega</th>
+                            
 
-			@endforeach
-		</tbody>
-	</table>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- <input type="hidden" value="{{ $contador = 1 }}"> -->
+                        @foreach ($productos as $dato)
+                        <tr>
+
+
+                            <td align="center">{{$dato->codigo_barras}}</td>
+                            <td align="center">{{$dato->descripcion}}</td>
+                            <td align="center">{{$dato->nombre}}</td>
+                            <td align="center" >{{$dato->existencia}}</td>
+                            <td align="center">{{$dato->cantidad}}</td>
+
+                            <td align="center">{{$dato->created_at}}</td>
+
+
+                          
+
+                        </tr>
+
+                        @endforeach
+                    </tbody>
+                </table>
+</div>
+<br>
+<h3>Total en Almacen</h3>
+ <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" aria-describedby="example_info" role="grid" style="width: 100%; ">
+                    <thead style="text-align: center;" class="thead-dark" id="panel">
+                        <tr>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Codigo de barras</th
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Existencia en almacen</th>
+                            
+                            
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- <input type="hidden" value="{{ $contador = 1 }}"> -->
+                        @foreach ($inv as $dato)
+                        <tr>
+
+
+                            <td align="center">{{$dato->codigo_barras}}</td>
+                            <td align="center">{{$dato->descripcion}}</td>
+                            
+                            <td align="center" >{{$dato->existencia}}</td>
+                           
+
+
+                          
+
+                        </tr>
+
+                        @endforeach
+                    </tbody>
+                </table>
+</div>
+                <br>
+              
 	<br>
 <h5>BMS Software Solutions 2022</h5>
 </body>

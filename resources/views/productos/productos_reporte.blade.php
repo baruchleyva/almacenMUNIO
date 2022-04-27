@@ -35,7 +35,7 @@
         <div class="col-12">
             <h1>
                 <br>
-                Reportes <i class="fas fa-paste"></i></h1>
+                Reporte de inventario <i class="fas fa-paste"></i></h1>
                 <div class="row">
                     <div class="col-4">
                         
@@ -58,36 +58,53 @@
 
 
             <!--@ include("notificacion")-->
-            <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered" >
-                    <thead>
-                    <tr>
-                        <th>Código de barras</th>
-                        <th>Descripción</th>
-                        <th>Precio de compra</th>
-                        <th>Precio de venta</th>
-                        <th>Utilidad</th>
-                        <th>Existencia</th>
-                        <th>Fecha de registro</th>
+           <div align='center' class="table-responsive col-md-12 order-md-1">
+   <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" aria-describedby="example_info" role="grid" style="width: 100%; ">
+                    <thead style="text-align: center;" class="thead-dark" id="panel">
+                        <tr>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Código de barras</th>
 
-                    </tr>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Proveedor</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad recibida</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad restante por producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Fecha de entrega</th>
+                            
+
+
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach($productos as $producto)
+
+                        <!-- <input type="hidden" value="{{ $contador = 1 }}"> -->
+                        @foreach ($productos as $dato)
                         <tr>
-                            <td>{{$producto['codigo_barras']}}</td>
-                            <td>{{$producto['descripcion']}}</td>
-                            <td>${{$producto['precio_compra']}}</td>
-                            <td>${{$producto['precio_venta']}}</td>
-                            <td>${{number_format($producto['precio_venta'] - $producto['precio_compra'],2)}}</td>
-                            <td>{{number_format($producto['existencia'],0)}}</td>
-                            <td>{{$producto['created_at']}}</td>
-                           
+
+
+                            <td align="center">{{$dato->codigo_barras}}</td>
+                            <td align="center">{{$dato->descripcion}}</td>
+                            <td align="center">{{$dato->nombre}}</td>
+                            <td align="center" >{{$dato->existencia}}</td>
+                            <td align="center">{{$dato->cantidad}}</td>
+
+                            <td align="center">{{$dato->created_at}}</td>
+
+
+
+
                         </tr>
-                    @endforeach
+                           @csrf
+                                    <input type="hidden" name="id" id="id" value="{{$dato->id}}">
+                                    <input type="hidden" name="cb" id="cb" value="{{$dato->codigo_barras}}">
+                                    <input type="hidden" name="desc" id="desc" value="{{$dato->descripcion}}">
+                                    <input type="hidden" name="nom" id="nom" value="{{$dato->nombre}}">
+                                    <input type="hidden" name="ex" id="ex" value="{{$dato->existencia}}">
+                                    <input type="hidden" name="can" id="can" value="{{$dato->cantidad}}">
+                                    <input type="hidden" name="created_at" id="created_at" value="{{$dato->created_at}}">
+                        @endforeach
                     </tbody>
                 </table>
-            </div>
+</div>
         </div>
     </div>
 @endsection

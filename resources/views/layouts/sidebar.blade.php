@@ -68,7 +68,7 @@
                     <i class='fas fa-paste'></i>
                     <div class="sb-nav-link-icon"></div>
                     <font color="white">
-                        Reportes
+                        Reporte Gral. Inventario
                     </font>
                 </a>
 

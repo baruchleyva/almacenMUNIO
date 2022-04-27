@@ -130,28 +130,18 @@ class ProductosController extends Controller
 
     public function panelReportes()
     {
-        $query = "SELECT p.codigo_barras,p.descripcion,p.precio_compra,p.precio_venta,p.existencia,p.created_at FROM productos p";
-        $produc = DB::SELECT($query);
-            //->get();
-        //return view("ventas.ventas_index", ["ventas" => $ventasConTotales,]);
-        $productos = [];
-        foreach ($produc as $list) {
-            $codigo_barras = $list->codigo_barras;
-            $descripcion = $list->descripcion;
-            $precio_compra = $list->precio_compra;
-            $precio_venta = $list->precio_venta;
-            $existencia = $list->existencia;
-            $created_at = $list->created_at;
-            
-            array_push($productos, [
-                'codigo_barras' => $codigo_barras,
-                'descripcion' => $descripcion,
-                'precio_compra' => $precio_compra,
-                'precio_venta' => $precio_venta,
-                'existencia' => $existencia,
-                'created_at' => $created_at]);
-            # code... 
-        }
+       $query= "SELECT inventarios.id,
+                        productos.codigo_barras,
+                        productos.descripcion,
+                        inventarios.existencia,
+                        inventarios.cantidad,
+                        proveedors.nombre,
+                        inventarios.created_at
+                        from inventarios
+                        inner join productos on productos.id = inventarios.id_producto
+                        INNER JOIN proveedors ON proveedors.id = inventarios.id_proveedor
+                        ORDER BY inventarios.created_at DESC";
+        $productos = DB::SELECT($query);
 
         return view('productos.productos_reporte', compact('productos'));
         
@@ -161,31 +151,29 @@ class ProductosController extends Controller
 
 public function reporte()
     {
-        $query = "SELECT p.codigo_barras,p.descripcion,p.precio_compra,p.precio_venta,p.existencia,p.created_at FROM productos p";
+        $query= "SELECT inventarios.id,
+                        productos.codigo_barras,
+                        productos.descripcion,
+                        inventarios.existencia,
+                        inventarios.cantidad,
+                        proveedors.nombre,
+                        inventarios.created_at
+                        from inventarios
+                        inner join productos on productos.id = inventarios.id_producto
+                        INNER JOIN proveedors ON proveedors.id = inventarios.id_proveedor
+                        ORDER BY inventarios.created_at DESC";
         $productos = DB::SELECT($query);
-            //->get();
-        //return view("ventas.ventas_index", ["ventas" => $ventasConTotales,]);
-        $product = [];
-        foreach ($productos as $list) {
-            $codigo_barras = $list->codigo_barras;
-            $descripcion = $list->descripcion;
-            $precio_compra = $list->precio_compra;
-            $precio_venta = $list->precio_venta;
-            $existencia = $list->existencia;
-            $created_at = $list->created_at;
-            
-            array_push($product, [
-                'codigo_barras' => $codigo_barras,
-                'descripcion' => $descripcion,
-                'precio_compra' => $precio_compra,
-                'precio_venta' => $precio_venta,
-                'existencia' => $existencia,
-                'created_at' => $created_at]);
-            # code... 
-        }
+
+         $p = "SELECT productos.descripcion,productos.codigo_barras,
+                    SUM(inventarios.cantidad) as existencia
+                    from inventarios
+                    inner join productos on productos.id = id_producto
+                    GROUP BY productos.descripcion,productos.codigo_barras
+                    order by productos.codigo_barras";
+            $inv = DB::SELECT($p);
 
 
-        $data= compact('product');
+        $data= compact('productos','inv');
         $pdf = PDF::loadView('pdf.inventario', $data);
         return $pdf->download('reporte_inventario.pdf');
            
