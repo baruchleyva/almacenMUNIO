@@ -43,7 +43,7 @@
         data: {id_inv:id_inv,id_area:id_area,existencia:existencia},
         success: function(result){
           console.log(result);
-          window.location.href = '../inventario.salidas';
+          window.location.href = '/public/inventario.salidas';
         }
       });
 
