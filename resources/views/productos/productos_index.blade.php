@@ -65,7 +65,7 @@
                         <th>Código de barras</th>
                         <th>Descripción</th>
                         <!--<th>Precio de compra</th>-->
-                        <th>Precio de unitario</th>
+                        <th>Precio unitario</th>
                         <!--<th>Utilidad</th>
                         <th>Existencia</th>-->
 
