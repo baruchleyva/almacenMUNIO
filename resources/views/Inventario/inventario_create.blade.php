@@ -75,4 +75,64 @@
             </form>
         </div>
     </div>
+    <br>
+    <h2>&nbsp;&nbsp;Entradas Registradas</h2>
+<div align='center' class="table-responsive col-md-12 order-md-1">
+   <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" aria-describedby="example_info" role="grid" style="width: 100%; ">
+                    <thead style="text-align: center;" class="thead-dark" id="panel">
+                        <tr>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Folio Entrada</th>
+
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Proveedor</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad recibida</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad restante por producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Fecha de entrega</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Descargar reporte</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- <input type="hidden" value="{{ $contador = 1 }}"> -->
+                        @foreach ($entradas as $dato)
+                        <tr>
+
+
+                            <td align="center">{{$dato->id}}</td>
+                            <td align="center">{{$dato->descripcion}}</td>
+                            <td align="center">{{$dato->nombre}}</td>
+                            <td align="center" >{{$dato->existencia}}</td>
+                            <td align="center">{{$dato->cantidad}}</td>
+
+                            <td align="center">{{$dato->created_at}}</td>
+
+
+                             <td align="center">
+                              <form action="{{route('inventario.descargarPDF')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id" id="id" value="{{$dato->id}}">
+                                    <input type="hidden" name="desc" id="desc" value="{{$dato->descripcion}}">
+                                    <input type="hidden" name="nom" id="nom" value="{{$dato->nombre}}">
+                                    <input type="hidden" name="ex" id="ex" value="{{$dato->existencia}}">
+                                    <input type="hidden" name="can" id="can" value="{{$dato->cantidad}}">
+                                    <input type="hidden" name="created_at" id="created_at" value="{{$dato->created_at}}">
+
+                                    <button class="btn btn-primary" type="submit" style="background-color: #De1428; border-color: #De1428;"> <i class='fas fa-file-pdf'></i>
+
+                                   </button>
+
+                                </form>
+
+
+                            </td>
+
+
+                        </tr>
+
+                        @endforeach
+                    </tbody>
+                </table>
+</div>
 @endsection

@@ -21,10 +21,16 @@ class inventarioController extends Controller
     public function index()
     {
 
-        $productos = Inventarios::select('productos.descripcion', 'proveedors.nombre', 'inventarios.existencia')
+        /*$productos = Inventarios::selectRaw('productos.descripcion','sum(inventarios.existencia)')
                 ->join('productos', 'productos.id', '=', 'id_producto')
-                ->join('proveedors', 'proveedors.id', '=', 'id_proveedor')
-                ->get();
+                ->groupBy('productos.descripcion')
+                ->get();*/
+        $p = "SELECT productos.descripcion,
+                    SUM(inventarios.cantidad) as existencia
+                    from inventarios
+                    inner join productos on productos.id = id_producto
+                    GROUP BY productos.descripcion";
+            $productos = DB::SELECT($p);
         //$productos = DB::SELECT($pro);
         return view("Inventario.inventario_index", compact('productos'));
     }
@@ -36,8 +42,20 @@ class inventarioController extends Controller
      */
     public function create()
     {
+        $productos = Producto::all();
+        $proveedores = Proveedors::all();
+        $query= "SELECT inventarios.id,
+                        productos.descripcion,
+                        inventarios.existencia,
+                        inventarios.cantidad,
+                        proveedors.nombre,
+                        inventarios.created_at
+                        from inventarios
+                        inner join productos on productos.id = inventarios.id_producto
+                        INNER JOIN proveedors ON proveedors.id = inventarios.id_proveedor";
+        $entradas = DB::SELECT($query);
 
-        return view("Inventario.inventario_create", ["productos" => Producto::all(), "proveedores" => Proveedors::all()]);
+        return view("Inventario.inventario_create", compact('productos','proveedores','entradas'));
     }
 
     public function salidas()

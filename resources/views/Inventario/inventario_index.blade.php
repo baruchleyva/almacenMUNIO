@@ -74,22 +74,20 @@
                     <thead>
                     <tr>
                         <th>Producto</th>
-                        <th>Proveedor</th>
+                        <!--<th>Proveedor</th>-->
                         <!--<th>Precio de compra</th>-->
                         <th>Cantidad</th>
                         <!--<th>Utilidad</th>
                         <th>Existencia</th>-->
 
-                        <!--<th>Editar</th>
-                        <th>Eliminar</th>-->
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($productos as $producto)
                         <tr>
-                            <td>{{$producto['descripcion']}}</td>
-                            <td>{{$producto->nombre}}</td>
-                            <td>{{$producto['existencia']}}</td>
+                            <td>{{$producto->descripcion}}</td>
+                            <!--<td>{ {$producto->nombre}}</td>-->
+                            <td>{{$producto->existencia}}</td>
                             <!--<td>
                                 <a class="btn btn-warning" href="{ {route("inventario.edit",[$producto])}}">
                                     <i class="fa fa-edit"></i>
@@ -104,6 +102,7 @@
                                     </button>
                                 </form>
                             </td>-->
+
                         </tr>
                      @endforeach
                     </tbody>
