@@ -3,7 +3,7 @@
 @extends('layouts.aplicacion')
 
 @section("content")
-<script src="js/TableToExcel.js"></script>
+<script src="{{asset('js/TableToExcel.js')}}"></script>
 <script type="text/javascript">
     function checarP() {
         // body...
