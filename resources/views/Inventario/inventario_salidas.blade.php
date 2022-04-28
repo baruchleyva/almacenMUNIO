@@ -3,6 +3,7 @@
 @extends('layouts.aplicacion')
 
 @section("content")
+<script src="js/TableToExcel.js"></script>
 <script type="text/javascript">
     function checarP() {
         // body...
@@ -113,6 +114,8 @@
     </div>
     <br>
     <h2>&nbsp;&nbsp;Salidas Registradas</h2>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="tableToExcel('example2', 'Salidas','Salidas')" type="button" class="btn btn-outline-success" id="exceltabla" name="exceltabla">EXCEL  <i class="fas fa-file-excel" aria-hidden="true"></i></button></div>
+
 <div align='center' class="table-responsive col-md-12 order-md-1">
    <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" aria-describedby="example_info" role="grid" style="width: 100%; ">
                     <thead style="text-align: center;" class="thead-dark" id="panel">
@@ -159,6 +162,46 @@
 
 
                             </td>
+
+
+
+                        </tr>
+
+                        @endforeach
+                    </tbody>
+                </table>
+
+                <table id="example2" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" aria-describedby="example_info" role="grid" style="width: 100%; display: none; ">
+                    <thead style="text-align: center;" class="thead-dark" id="panel">
+                        <tr>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Folio Salida</th>
+
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Area a la que se entregó</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad entregada</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Fecha de entrega</th>
+                            
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- <input type="hidden" value="{{ $contador = 1 }}"> -->
+                        @foreach ($salidas as $dato)
+                        <tr>
+
+
+                            <td align="center">{{$dato->id}}</td>
+                            <td align="center">{{$dato->id_inv}}</td>
+                            
+                            <td align="center">{{$dato->area}}</td>
+                            <td align="center">{{$dato->existencia}}</td>
+                            <td align="center">{{$dato->created_at}}</td>
+                            
+
+                            
+
 
 
                         </tr>

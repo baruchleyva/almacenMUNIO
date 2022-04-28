@@ -3,6 +3,7 @@
 @extends('layouts.aplicacion')
 
 @section("content")
+<script src="js/TableToExcel.js"></script>
 <script type="text/javascript">
     function checarP() {
         // body...
@@ -29,7 +30,7 @@
         <div class="col-8">
             <h1 align="center"><br>Agregar Entrada</h1>
 
-            <form id="formulario1" method="POST" action="{{route("inventario.store")}}">
+            <form id="formulario1" method="POST" action="{{route('inventario.store')}}">
                 @csrf
                 <div class="form-group">
                     <div class="input-group mb-3">
@@ -71,12 +72,13 @@
 
                 
                 <button class="btn btn-success" type="button" onclick="checarP()">Guardar</button>
-                <a class="btn btn-primary" href="{{route("inventario.index")}}">Volver al listado</a>
+                <a class="btn btn-primary" href="{{route('inventario.index')}}">Volver al listado</a>
             </form>
         </div>
     </div>
     <br>
     <h2>&nbsp;&nbsp;Entradas Registradas</h2>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="tableToExcel('example2', 'Entradas','Entradas')" type="button" class="btn btn-outline-success" id="exceltabla" name="exceltabla">EXCEL  <i class="fas fa-file-excel" aria-hidden="true"></i></button></div>
 <div align='center' class="table-responsive col-md-12 order-md-1">
    <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" aria-describedby="example_info" role="grid" style="width: 100%; ">
                     <thead style="text-align: center;" class="thead-dark" id="panel">
@@ -128,6 +130,45 @@
 
                             </td>
 
+
+                        </tr>
+
+                        @endforeach
+                    </tbody>
+                </table>
+
+                 <table id="example2" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" aria-describedby="example_info" role="grid" style="width: 100%; display: none; ">
+                    <thead style="text-align: center;" class="thead-dark" id="panel">
+                        <tr>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Folio Entrada</th>
+
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Proveedor</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad recibida</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad restante por producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Fecha de entrega</th>
+                           
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- <input type="hidden" value="{{ $contador = 1 }}"> -->
+                        @foreach ($entradas as $dato)
+                        <tr>
+
+
+                            <td align="center">{{$dato->id}}</td>
+                            <td align="center">{{$dato->descripcion}}</td>
+                            <td align="center">{{$dato->nombre}}</td>
+                            <td align="center" >{{$dato->existencia}}</td>
+                            <td align="center">{{$dato->cantidad}}</td>
+
+                            <td align="center">{{$dato->created_at}}</td>
+
+
+                            
 
                         </tr>
 
