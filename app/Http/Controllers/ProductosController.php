@@ -143,7 +143,15 @@ class ProductosController extends Controller
                         ORDER BY inventarios.created_at DESC";
         $productos = DB::SELECT($query);
 
-        return view('productos.productos_reporte', compact('productos'));
+         $p = "SELECT productos.descripcion,productos.codigo_barras,
+                    SUM(inventarios.cantidad) as existencia
+                    from inventarios
+                    inner join productos on productos.id = id_producto
+                    GROUP BY productos.descripcion,productos.codigo_barras
+                    order by productos.codigo_barras";
+            $inv = DB::SELECT($p);
+
+        return view('productos.productos_reporte', compact('productos','inv'));
         
            
          
