@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Proveedors;
+use App\Estados;
+use App\Municipios;
 use Illuminate\Http\Request;
 
 class proveedoresController extends Controller
@@ -24,7 +26,9 @@ class proveedoresController extends Controller
      */
     public function create()
     {
-        return view("proveedors.proveedores_create");
+        $estados = Estados::all();
+        $municipios = Municipios::all();
+        return view("proveedors.proveedores_create",compact('estados','municipios'));
     }
 
     /**
@@ -37,6 +41,15 @@ class proveedoresController extends Controller
     {
         (new Proveedors($request->input()))->saveOrFail();
         return redirect()->route("proveedors.index")->with("mensaje", "Proveedor agregado");
+    }
+
+    public function getMunicipios(Request $request)
+    {
+        $clave = $request->input('clave');
+        $estado = Estados::where('CLAVE_ESTADO','=',$clave)->get();
+        $ID_E = $estado[0]->ID_ESTADO;
+        $municipios = Municipios::where('ID_ESTADO','=',$ID_E)->get();
+        return $municipios;
     }
 
     /**
