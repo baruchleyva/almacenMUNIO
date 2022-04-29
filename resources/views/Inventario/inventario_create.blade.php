@@ -115,7 +115,7 @@
                             <td align="center">{{$dato->nombre}}</td>
                             <td align="center" >{{$dato->existencia}}</td>
                             <td align="center">{{$dato->cantidad}}</td>
-                            <td align="center">{{$dato->precio}}</td>
+                            <td align="center">${{$dato->precio}}</td>
 
                             <td align="center">{{$dato->created_at}}</td>
 
