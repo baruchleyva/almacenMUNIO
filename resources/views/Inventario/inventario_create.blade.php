@@ -128,6 +128,7 @@
                                     <input type="hidden" name="nom" id="nom" value="{{$dato->nombre}}">
                                     <input type="hidden" name="ex" id="ex" value="{{$dato->existencia}}">
                                     <input type="hidden" name="can" id="can" value="{{$dato->cantidad}}">
+                                    <input type="hidden" name="pre" id="pre" value="{{$dato->precio}}">
                                     <input type="hidden" name="created_at" id="created_at" value="{{$dato->created_at}}">
 
                                     <button class="btn btn-primary" type="submit" style="background-color: #De1428; border-color: #De1428;"> <i class='fas fa-file-pdf'></i>

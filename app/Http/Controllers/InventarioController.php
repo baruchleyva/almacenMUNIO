@@ -162,12 +162,13 @@ ORDER BY s.created_at asc";
         $nombre= $request->get('nom');
         $exist= $request->get('ex');
         $cant= $request->get('can');
+        $precio= $request->get('pre');
         $created_at= $request->get('created_at');
 
         //$area = Areas::select('area')->where('id','=',$id_area)->get();
         //$descripcion = Producto::select('descripcion')->where('descripcion','=',$descripcion)->get();
         $cant = $cant;
-        $pdf = PDF::loadView('pdf.entrada_inv', compact('id', 'descripcion', 'nombre','exist','cant','created_at'));
+        $pdf = PDF::loadView('pdf.entrada_inv', compact('id', 'descripcion', 'nombre','exist','cant','precio','created_at'));
         return $pdf->download('entrada_inventario.pdf');
     }
 

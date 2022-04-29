@@ -56,6 +56,7 @@ tr:nth-child(even) {
                         <th>Producto</th>
                         <th>Proveedor</th>
                         <th>Cantidad Recibida</th>
+                        <th>Precio Unitario</th>
                         <th>Fecha de Recepción</th>
                         
                         
@@ -72,6 +73,7 @@ tr:nth-child(even) {
 				<td style="font-size: 11">{{$descripcion}}</td>
 				<td style="font-size: 11">{{$nombre}}</td>
 				<td style="font-size: 11">{{$exist}}</td>
+				<td style="font-size: 11">${{$precio}}</td>
 				<td style="font-size: 11">{{$created_at}}</td>
 				
 				
