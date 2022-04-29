@@ -64,7 +64,13 @@
                 <div class="form-group">
                     <label class="label">Cantidad Entregada</label>
                     <input  autocomplete="off" name="existencia" id="existencia" class="form-control"
-                           type="text" placeholder="Cantidad Entregada" >
+                           type="number" placeholder="Cantidad Entregada" >
+
+                </div>
+                <div class="form-group">
+                    <label class="label">Precio</label>
+                    $<input  autocomplete="off" name="precio" id="precio" class="form-control"
+                           type="number" placeholder="Precio unitario" >
 
                 </div>
                 <input name="cantidad" id="cantidad" class="form-control" type="hidden">
@@ -89,7 +95,9 @@
                             <th style="text-align: center; font-size: 12px;" WIDTH="15%">Proveedor</th>
                             <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad recibida</th>
                             <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad restante por producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Precio unitario</th>
                             <th style="text-align: center; font-size: 12px;" WIDTH="15%">Fecha de entrega</th>
+                            
                             <th style="text-align: center; font-size: 12px;" WIDTH="15%">Descargar reporte</th>
 
 
@@ -107,6 +115,7 @@
                             <td align="center">{{$dato->nombre}}</td>
                             <td align="center" >{{$dato->existencia}}</td>
                             <td align="center">{{$dato->cantidad}}</td>
+                            <td align="center">{{$dato->precio}}</td>
 
                             <td align="center">{{$dato->created_at}}</td>
 
@@ -146,6 +155,7 @@
                             <th style="text-align: center; font-size: 12px;" WIDTH="15%">Proveedor</th>
                             <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad recibida</th>
                             <th style="text-align: center; font-size: 12px;" WIDTH="15%">Cantidad restante por producto</th>
+                            <th style="text-align: center; font-size: 12px;" WIDTH="15%">Precio</th>
                             <th style="text-align: center; font-size: 12px;" WIDTH="15%">Fecha de entrega</th>
                            
 
@@ -164,6 +174,7 @@
                             <td align="center">{{$dato->nombre}}</td>
                             <td align="center" >{{$dato->existencia}}</td>
                             <td align="center">{{$dato->cantidad}}</td>
+                            <td align="center">${{$dato->precio}}</td>
 
                             <td align="center">{{$dato->created_at}}</td>
 

@@ -48,6 +48,7 @@ class inventarioController extends Controller
                         productos.descripcion,
                         inventarios.existencia,
                         inventarios.cantidad,
+                        inventarios.precio,
                         proveedors.nombre,
                         inventarios.created_at
                         from inventarios
